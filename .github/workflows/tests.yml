@@ -20,4 +20,14 @@ jobs:
           name: Go code coverage
           path: coverage.out
       - run: go tool cover -func coverage.out
-
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.60
+  helm:
+    runs-on: ubuntu-latest
+    name: Helm lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: igabaydulin/helm-check-action@master
+        env:
+          CHART_LOCATION: ./helm
