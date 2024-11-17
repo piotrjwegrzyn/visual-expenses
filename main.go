@@ -14,7 +14,9 @@ func main() {
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(helloWorld()))
+	if _, err := w.Write([]byte(helloWorld())); err != nil {
+		slog.Error("error during writing response")
+	}
 }
 
 func helloWorld() string {

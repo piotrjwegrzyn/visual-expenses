@@ -30,4 +30,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: igabaydulin/helm-check-action@master
         env:
-          CHART_LOCATION: ./visual-expenses
+          CHART_LOCATION: ./helm
