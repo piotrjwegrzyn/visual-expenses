@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: visual-expenses API
+  description: An API for visualizing the expenses from the MyExpenses application
+  license:
+    name: GNU General Public License version 3 or later
+    identifier: GPL-3.0-or-later
+  version: 0.1.0
+
+paths:
+  /backup:
+    get:
+      summary: Get last available backup zip archive
+      responses:
+        200:
+          description: Returns a zip file
+          content:
+            application/zip:
+              encoding:
+                gzip:
+                  contentType: application/zip
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      security:
+        - tokenAuth: []
+
+    put:
+      summary: Put a new backup zip archive
+      requestBody:
+        description: The zip archive
+        content:
+          application/zip:
+            encoding:
+              gzip:
+                contentType: application/zip
+        required: true
+      responses:
+        204:
+          description: The file is created
+        401:
+          description: Unauthorized
+      security:
+        - tokenAuth: []
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: backupToken
+      in: query
